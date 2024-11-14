@@ -1,5 +1,6 @@
 package com.example.projecto_suarez.presentation.news_navigator
 
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,11 +33,10 @@ import com.example.projecto_suarez.presentation.details.DetailsViewModel
 import com.example.projecto_suarez.presentation.google_maps.GoogleMapScreen
 import com.example.projecto_suarez.presentation.home.HomeScreen
 import com.example.projecto_suarez.presentation.home.HomeViewModel
-import com.example.projecto_suarez.presentation.map.BeaconViewModel
-import com.example.projecto_suarez.presentation.map.MapScreen
 import com.example.projecto_suarez.presentation.navgraph.Route
 import com.example.projecto_suarez.presentation.news_navigator.components.BottomNavigationItem
 import com.example.projecto_suarez.presentation.news_navigator.components.NewsBottomNavigation
+import com.example.projecto_suarez.presentation.pedometer.PedometerScreen
 import com.example.projecto_suarez.presentation.search.SearchScreen
 import com.example.projecto_suarez.presentation.search.SearchViewModel
 
@@ -188,24 +188,7 @@ fun NewsNavigator() {
                 )
             }
             composable(route = Route.MapScreen.route) {
-                //val viewModel: BookmarkViewModel = hiltViewModel()
-                //val state = viewModel.state.value
-                //OnBackClickStateSaver(navController = navController)
-                val viewModel: BeaconViewModel = hiltViewModel()
-                val state = viewModel.state.value
-                val result = viewModel.result.value
-
-                MapScreen(
-                    result = result,
-                    state = state,
-                    event = viewModel::onEvent,
-                    navigateToDetails = { article ->
-                        navigateToDetails(
-                            navController = navController,
-                            article = article
-                        )
-                    }
-                )
+                PedometerScreen()
             }
             composable(route = Route.GoogleMap.route) {
                 GoogleMapScreen()
