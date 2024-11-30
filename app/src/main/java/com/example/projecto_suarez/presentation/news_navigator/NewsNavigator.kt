@@ -29,6 +29,7 @@ import com.example.projecto_suarez.presentation.bookmark.BookmarkViewModel
 import com.example.projecto_suarez.presentation.details.DetailsEvent
 import com.example.projecto_suarez.presentation.details.DetailsScreen
 import com.example.projecto_suarez.presentation.details.DetailsViewModel
+import com.example.projecto_suarez.presentation.google_maps.GoogleMapScreen
 import com.example.projecto_suarez.presentation.home.HomeScreen
 import com.example.projecto_suarez.presentation.home.HomeViewModel
 import com.example.projecto_suarez.presentation.map.BeaconViewModel
@@ -36,6 +37,7 @@ import com.example.projecto_suarez.presentation.map.MapScreen
 import com.example.projecto_suarez.presentation.navgraph.Route
 import com.example.projecto_suarez.presentation.news_navigator.components.BottomNavigationItem
 import com.example.projecto_suarez.presentation.news_navigator.components.NewsBottomNavigation
+import com.example.projecto_suarez.presentation.pedometer.PedometerScreen
 import com.example.projecto_suarez.presentation.search.SearchScreen
 import com.example.projecto_suarez.presentation.search.SearchViewModel
 
@@ -46,9 +48,10 @@ fun NewsNavigator() {
     val bottomNavigationItems = remember {
         listOf(
             BottomNavigationItem(icon = R.drawable.ic_home, text = "Home"),
-            BottomNavigationItem(icon = R.drawable.ic_search, text = "Search"),
             BottomNavigationItem(icon = R.drawable.ic_bookmark, text = "Bookmark"),
-            BottomNavigationItem(icon = R.drawable.ic_preferences, text = "Map"),
+            BottomNavigationItem(icon = R.drawable.ic_preferences, text = "Iot"),
+            BottomNavigationItem(icon = R.drawable.ic_network, text = "GMap"),
+            BottomNavigationItem(icon = R.drawable.ic_time, text = "Steps"),
         )
     }
 
@@ -60,9 +63,10 @@ fun NewsNavigator() {
 
     selectedItem = when (backStackState?.destination?.route) {
         Route.HomeScreen.route -> 0
-        Route.SearchScreen.route -> 1
-        Route.BookmarkScreen.route -> 2
-        Route.MapScreen.route -> 3
+        Route.BookmarkScreen.route -> 1
+        Route.MapScreen.route -> 2
+        Route.GoogleMapScreen.route -> 3
+        Route.PedometerScreen.route -> 4
         else -> 0
     }
 
@@ -71,7 +75,9 @@ fun NewsNavigator() {
         backStackState?.destination?.route == Route.HomeScreen.route ||
                 backStackState?.destination?.route == Route.SearchScreen.route ||
                 backStackState?.destination?.route == Route.BookmarkScreen.route ||
-                backStackState?.destination?.route == Route.MapScreen.route
+                backStackState?.destination?.route == Route.MapScreen.route ||
+                backStackState?.destination?.route == Route.GoogleMapScreen.route ||
+                backStackState?.destination?.route == Route.PedometerScreen.route
 
     }
     Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {
@@ -88,16 +94,20 @@ fun NewsNavigator() {
 
                         1 -> navigateToTab(
                             navController = navController,
-                            route = Route.SearchScreen.route
+                            route = Route.BookmarkScreen.route
                         )
-
                         2 -> navigateToTab(
                             navController = navController,
-                            route = Route.BookmarkScreen.route
+                            route = Route.MapScreen.route
                         )
                         3 -> navigateToTab(
                             navController = navController,
-                            route = Route.MapScreen.route
+                            route = Route.GoogleMapScreen.route
+                        )
+
+                        4 -> navigateToTab(
+                            navController = navController,
+                            route = Route.PedometerScreen.route
                         )
                     }
                 }
@@ -180,13 +190,15 @@ fun NewsNavigator() {
                 )
             }
             composable(route = Route.MapScreen.route) {
-                //val viewModel: BookmarkViewModel = hiltViewModel()
-                //val state = viewModel.state.value
-                //OnBackClickStateSaver(navController = navController)
                 val viewModel: BeaconViewModel = hiltViewModel()
                 val state = viewModel.state.value
-
                 MapScreen(state)
+            }
+            composable(route = Route.PedometerScreen.route) {
+                PedometerScreen()
+            }
+            composable(route = Route.GoogleMapScreen.route) {
+                GoogleMapScreen()
             }
         }
     }

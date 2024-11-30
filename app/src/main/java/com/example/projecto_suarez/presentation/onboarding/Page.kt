@@ -8,20 +8,21 @@ data class Page(
     val description: String,
     @DrawableRes val image: Int
 )
+
 val pages = listOf(
     Page(
-        title = "Explore Unique Art",
-        description = "Immerse yourself in a world of creativity and expression. Discover unique works by renowned and emerging artists.",
+        title = "Monitorea tu Bienestar",
+        description = "Lleva un registro fácil de tus signos vitales y progreso diario.",
         image = R.drawable.onboarding1
     ),
     Page(
-        title = "Create Your Own Story",
-        description = "Make each visit a personal experience. Find works that inspire you and tell your story. An amazin place to find art lovers",
+        title = "Objetivos Personalizados",
+        description = "Define tus metas de salud y recibe recomendaciones basadas en tus datos.",
         image = R.drawable.onboarding2
     ),
     Page(
-        title = "Share and Connect",
-        description = "Celebrate art by sharing your discoveries with friends and family. Join a passionate community of art lovers.",
+        title = "Consejos de Expertos",
+        description = "Descubre tips y hábitos saludables avalados por profesionales.",
         image = R.drawable.onboarding3
     )
 )

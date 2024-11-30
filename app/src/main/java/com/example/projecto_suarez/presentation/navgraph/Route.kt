@@ -20,4 +20,9 @@ sealed class Route (
     object NewsNavigatorScreen : Route(route = "newsNavigator")
     object MapScreen : Route(route = "mapScreen")
 
+    object PedometerScreen : Route(route = "pedometerScreen")
+
+    object GoogleMapScreen : Route(route = "googleMapScreen")
+
+
 }
